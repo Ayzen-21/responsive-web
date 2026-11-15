@@ -1,0 +1,597 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BudgetBasics – Smart money habits for students</title>
+<meta name="description" content="Learn budgeting basics, needs vs wants, the 50-30-20 rule, savings goals and common money mistakes. Educational only.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a href="#main" class="ic" style="position:absolute;left:-999px" onfocus="this.style.left='8px'">Skip to content</a>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#home" aria-label="BudgetBasics home"><b id="currencyMark">$</b><span>BudgetBasics</span></a>
+    <nav id="nav" aria-label="Main">
+      <a href="#learn">Basics</a>
+      <a href="#needs">Needs vs Wants</a>
+      <a href="#rule">50-30-20</a>
+      <a href="#goals">Goals</a>
+      <a href="#planner">Planner</a>
+      <a href="#mistakes">Mistakes</a>
+      <a href="#gallery">Infographics</a>
+      <a href="#about">About</a>
+      <a href="#contact">Feedback</a>
+      <button class="link" data-chat>✨ Ask AI</button>
+    </nav>
+
+    <select id="cty" aria-label="Country and currency"></select>
+
+    <div class="am">
+      <button class="btn alt" id="acct" aria-label="Sign in" aria-haspopup="true">
+        <span aria-hidden="true">👤</span><span class="nm">Sign in</span>
+      </button>
+      <div class="menu" id="amenu" hidden>
+        <p><b id="who"></b></p>
+        <p class="mut">Saved on this device only.</p>
+        <button class="btn alt" id="so">Sign out</button>
+        <button class="btn alt" id="del" style="color:var(--bad);border-color:var(--bad)">Delete account</button>
+      </div>
+    </div>
+
+    <button class="ic theme-toggle" id="theme" type="button" aria-label="Switch to dark mode" title="Switch to dark mode" aria-pressed="false">
+      <span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">Dark mode</span>
+    </button>
+    <button class="ic" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav">☰</button>
+  </div>
+</header>
+
+
+<main id="main" class="wrap">
+  <!-- HERO -->
+  <div class="hero" id="home">
+    <div>
+      <p class="mut" id="hi">Smart money. Better future.</p>
+      <h1 id="heroHeading">Master your money, one small decision at a time.</h1>
+      <p>Welcome to BudgetBasics – simple lessons, calculators and practice tools that help students plan allowances, avoid money traps and save for what matters.</p>
+      <div class="cta">
+        <a class="btn" href="#learn">Start learning</a>
+        <a class="btn alt" href="#rule">Try the 50-30-20 calculator</a>
+        <button class="btn alt" data-chat>✨ Ask the AI</button>
+      </div>
+      <div class="trust">
+        <span>✓ Free</span>
+        <span>✓ No sign-up required</span>
+        <span>✓ Private: nothing leaves your browser</span>
+      </div>
+    </div>
+    <div class="card hero-income-card" style="text-align:center">
+      <div class="donut" id="hd" data-c="">
+        <div class="donut-labels" aria-hidden="true">
+          <span class="donut-label donut-label-needs">50%</span>
+          <span class="donut-label donut-label-wants">30%</span>
+          <span class="donut-label donut-label-savings">20%</span>
+        </div>
+      </div>
+      <label for="hs">Weekly income: <b id="hv">$500</b></label>
+      <input id="hs" class="income-display" type="range" min="50" max="1000" step="10" value="500" aria-describedby="hn" aria-label="Weekly income">
+      <p class="mut" id="hn" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <div class="tick">
+    💡 <span id="tip"></span>
+    <span class="meta" style="margin-left:auto">
+      👥 <b id="vis">–</b> visitors<br>
+      <span id="clock" class="tm"></span>
+    </span>
+  </div>
+
+  <!-- BASICS -->
+  <section id="learn">
+    <h2>Budgeting basics</h2>
+    <p class="mut">Six ideas you need before you make any budget.</p>
+    <div class="grid" id="cards" style="margin:14px 0"></div>
+
+    <div class="card">
+      <h3>Sample student monthly budget (sample values, rough local scale)</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Category</th><th class="n">Amount</th><th class="n">% of income</th></tr></thead>
+          <tbody id="bt"></tbody>
+        </table>
+      </div>
+      <p class="mut">Sample numbers for learning only. Savings and spending are shown as shares of income.</p>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h3>Knowledge check <span class="mut" id="kq"></span></h3>
+      <p id="kt"></p>
+      <div id="ko"></div>
+      <p id="kf" aria-live="polite"></p>
+      <button class="btn" id="kn" hidden>Next question</button>
+    </div>
+  </section>
+
+  <!-- NEEDS VS WANTS -->
+  <section id="needs">
+    <h2>Needs vs wants</h2>
+    <p class="mut">Pick an item, then choose where it belongs. You'll get instant feedback.</p>
+    <div class="card pool" id="pool" aria-label="Items to classify"></div>
+    <div class="row" style="margin:10px 0">
+      <button class="btn" data-a="need">It's a Need</button>
+      <button class="btn alt" data-a="want">It's a Want</button>
+    </div>
+    <p id="nf" aria-live="polite" class="note">Select an item to begin.</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="card col"><h3>✅ Needs</h3><div id="cn"></div></div>
+      <div class="card col"><h3>⭐ Wants</h3><div id="wantsList"></div></div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h3>Decision guide</h3>
+      <div class="flow">
+        <span>Is it essential now?</span>→
+        Yes: <span style="background:var(--soft)">Prioritize – pay for it first</span> →
+        No: <span>Can wait – sleep on it for 24 hours</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 50-30-20 -->
+  <section id="rule">
+    <h2>50-30-20 budget calculator</h2>
+    <p class="mut">Split after-tax income: 50% needs, 30% wants, 20% savings. No fixed income? Switch to Irregular income.</p>
+    <div class="grid g2">
+      <div class="card">
+        <div class="seg" aria-label="Income type">
+          <button type="button" id="mf" aria-pressed="true">Regular income</button>
+          <button type="button" id="mv" aria-pressed="false">Irregular income</button>
+        </div>
+        <div id="pf">
+          <label for="inc">Monthly income (<span class="cur">$</span>)</label>
+          <input id="inc" inputmode="decimal" placeholder="e.g. 500">
+        </div>
+        <div id="pv" hidden>
+          <p class="mut">Freelance, gig work, commissions or a changing allowance? Enter your last 3–6 months. Leave unused boxes empty.</p>
+          <div class="grid" id="ms" style="grid-template-columns:repeat(auto-fit,minmax(110px,1fr))"></div>
+          <label for="inn">Essential monthly needs (optional)</label>
+          <input id="inn" inputmode="decimal" placeholder="Rent, food, transport…">
+        </div>
+        <div class="err" id="ie" role="alert"></div>
+        <button class="btn" id="calc">Calculate</button>
+        <div class="note">Educational estimate only – the split is a guideline you can adjust to your life.</div>
+      </div>
+      <div class="card" id="res">
+        <div class="mut">Enter an income to see your split.</div>
+      </div>
+    </div>
+    <div class="allowance-layout" id="planner">
+      <form class="card" id="allowanceForm" novalidate>
+        <p class="eyebrow">Private allowance vault</p>
+        <h3>Release money on your schedule</h3>
+        <p class="mut">Set your monthly money once. This vault keeps only the 20% savings portion reserved until its scheduled release date.</p>
+        <label for="allowanceAmount">Monthly money (<span class="cur">USD</span>)</label>
+        <input id="allowanceAmount" inputmode="decimal" placeholder="e.g. 500">
+        <div class="err" id="allowanceError" role="alert"></div>
+        <label for="allowanceCadence">Savings release schedule</label>
+        <select id="allowanceCadence">
+          <option value="monthly">Once a month</option>
+          <option value="biweekly">Every two weeks</option>
+          <option value="weekly">Every week</option>
+        </select>
+        <label for="allowanceStart">First savings release date</label>
+        <input id="allowanceStart" type="date">
+        <button class="btn" type="submit">Save savings plan</button>
+        <button class="btn alt" type="button" id="allowanceReset">Clear vault</button>
+      </form>
+      <div class="card vault-result" id="allowanceResult" aria-live="polite" hidden>
+        <div class="mut">Save an allowance plan to start releasing money by schedule.</div>
+      </div>
+    </div>
+    <div class="card bank-monitor" id="bankMonitor">
+      <div class="monitor-heading">
+        <div>
+          <p class="eyebrow">Manual money monitor</p>
+          <h3>Upcoming money</h3>
+        </div>
+        <span class="connection-status"><i></i> Saved on this device</span>
+      </div>
+      <p class="mut monitor-intro">Add expected expenses, savings deposits, or incoming needs manually. This helps you see what is already planned without connecting a bank account.</p>
+      <div class="monitor-summary" aria-label="Upcoming money totals">
+        <div><small>All upcoming</small><b id="pendingTotal">$0</b></div>
+        <div><small>Needs</small><b id="pendingNeeds">$0</b></div>
+        <div><small>Wants</small><b id="pendingWants">$0</b></div>
+        <div><small>Savings</small><b id="pendingSavings">$0</b></div>
+      </div>
+      <div class="monitor-entry">
+        <div class="subsection-heading"><span class="eyebrow">Add an item</span><b>Plan money before it moves</b></div>
+        <form class="monitor-form" id="pendingForm" novalidate>
+          <input id="pendingName" placeholder="Pending item" aria-label="Pending item" maxlength="50">
+          <input id="pendingAmount" inputmode="decimal" placeholder="Amount" aria-label="Pending amount">
+          <select id="pendingType" aria-label="Pending transaction type">
+            <option value="needs">Need</option>
+            <option value="wants">Want</option>
+            <option value="savings">Savings</option>
+          </select>
+          <button class="btn" type="submit">Add pending</button>
+        </form>
+        <div class="err" id="pendingError" role="alert"></div>
+      </div>
+      <div class="monitor-records">
+        <div class="subsection-heading"><span class="eyebrow">Your list</span><b>Upcoming transactions</b></div>
+        <div class="tw">
+          <table>
+            <thead><tr><th>Item</th><th>Type</th><th class="n">Amount</th><th>Action</th></tr></thead>
+            <tbody id="pendingTable"><tr><td colspan="4" class="mut">No pending items.</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GOALS -->
+  <section id="goals" class="goals-section">
+    <h2>Savings goals</h2>
+    <p class="mut">Create separate locked goals for the things you plan to buy. This is a browser-only simulation: it does not hold real money.</p>
+    <div class="goal-overview">
+      <div class="goal-block-heading"><span class="eyebrow">Your overview</span><h3>See the shape of your saving plan</h3></div>
+      <div class="card" id="goalDashboard" aria-live="polite">
+        <div class="grid">
+          <div><p class="mut">Total savings</p><b id="goalTotal">$0</b></div>
+          <div><p class="mut">Active goals</p><b id="goalActive">0</b></div>
+          <div><p class="mut">Completed goals</p><b id="goalCompleted">0</b></div>
+          <div><p class="mut">Overall progress</p><b id="goalProgress">0%</b></div>
+        </div>
+        <p class="mut" id="goalNextUnlock">No unlock dates yet.</p>
+        <p class="note">Balances, dates, withdrawals, and calculations are simulated and saved only in this browser.</p>
+      </div>
+    </div>
+    <div class="goal-block-heading"><span class="eyebrow">Start here</span><h3>Create a locked goal</h3><p class="mut">Name the purpose, set the target, and choose how strict the plan should be before you can access the money.</p></div>
+    <div class="grid g2 goal-builder-grid">
+      <div class="card goal-form-card">
+        <div class="goal-form-header">
+          <div>
+            <p class="goal-kicker">Goal setup</p>
+            <h3>Create your plan</h3>
+          </div>
+          <span class="goal-mode-chip">Smart saving</span>
+        </div>
+
+        <div class="form-grid">
+          <div class="field field-full">
+            <label for="gn">What are you saving for?</label>
+            <input id="gn" placeholder="e.g. Laptop, bicycle, course">
+            <div class="err" id="e1"></div>
+          </div>
+
+          <div class="field">
+            <label for="gt">Target amount (<span class="cur">$</span>)</label>
+            <input id="gt" inputmode="decimal">
+            <div class="err" id="e2"></div>
+          </div>
+
+          <div class="field">
+            <label for="gc">Already saved (<span class="cur">$</span>)</label>
+            <input id="gc" inputmode="decimal" value="0">
+            <div class="err" id="e3"></div>
+          </div>
+
+          <div class="field">
+            <label for="gm">Monthly deposit (<span class="cur">$</span>)</label>
+            <input id="gm" inputmode="decimal">
+            <div class="err" id="e4"></div>
+          </div>
+
+          <div class="field">
+            <label for="gcategory">Category</label>
+            <select id="gcategory">
+              <option>Education</option><option>Home</option><option>Health</option><option>Transport</option><option>Business</option><option>Personal</option><option>Emergency</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="gfrequency">Contribution rhythm</label>
+            <select id="gfrequency"><option value="monthly">Monthly</option><option value="weekly">Weekly</option><option value="daily">Daily</option></select>
+          </div>
+
+          <div class="field field-full">
+            <label>Choose your saving style</label>
+            <div class="mode-grid" role="radiogroup" aria-label="Goal mode selection">
+              <button type="button" class="mode-card active" data-mode="rigid" aria-pressed="true">
+                <span class="mode-title">Rigid mode</span>
+                <span class="mode-copy">Lock the money until your chosen date. Early removal costs 1%.</span>
+              </button>
+              <button type="button" class="mode-card" data-mode="flexible" aria-pressed="false">
+                <span class="mode-title">Flexible mode</span>
+                <span class="mode-copy">Keep the goal, but you can access the cash whenever needed.</span>
+              </button>
+            </div>
+            <select id="gmode" hidden>
+              <option value="rigid" selected>Rigid mode</option>
+              <option value="flexible">Flexible mode</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="gstart">Start date</label>
+            <input id="gstart" type="date">
+          </div>
+
+          <div class="field">
+            <label for="gunlock">Unlock date</label>
+            <input id="gunlock" type="date">
+            <div class="err" id="e5"></div>
+          </div>
+
+          <div class="field field-full">
+            <label for="gmotivation">Why does this goal matter? (optional)</label>
+            <textarea id="gmotivation" rows="2" placeholder="I am saving this money to..."></textarea>
+          </div>
+        </div>
+
+        <button class="btn" id="gb">Lock savings plan</button>
+      </div>
+      <div class="card goal-preview-card" id="gr" hidden>
+        <div class="mut">Your plan will appear here.</div>
+      </div>
+    </div>
+    <div class="goal-commitments">
+      <div class="goal-block-heading"><span class="eyebrow">Your commitments</span><h3>Active and saved goals</h3><p class="mut">Each goal keeps its purpose, progress, journey, and actions together.</p></div>
+      <div class="card" id="goalList" aria-live="polite">
+        <h3>Your saved goals</h3>
+        <p class="mut">Create a goal to see its locked balance here.</p>
+      </div>
+    </div>
+    <div class="goal-tools">
+      <div class="goal-block-heading"><span class="eyebrow">Make a decision</span><h3>Before you spend</h3><p class="mut">Use the simulator to understand the effect of a purchase without judgment.</p></div>
+      <div class="card goal-decision-card">
+      <h3>Can I afford this?</h3>
+      <p class="mut">See how a proposed expense could affect a locked goal before you spend.</p>
+      <div class="grid g2">
+        <div><label for="affordAmount">Proposed expense (<span class="cur">$</span>)</label><input id="affordAmount" inputmode="decimal" placeholder="e.g. 50"></div>
+        <div><label for="affordGoal">Goal</label><select id="affordGoal"><option value="">Create a goal first</option></select></div>
+      </div>
+      <button class="btn alt" type="button" id="affordCheck">Check impact</button>
+      <p class="note" id="affordResult">Choose a goal and enter an amount to see the impact.</p>
+      </div>
+      <div class="grid g2 goal-support-grid">
+        <div class="card goal-support-card">
+        <h3>Emergency reserve</h3>
+        <p class="mut">A planning tool only, not financial advice. Keep this separate from purchase goals.</p>
+        <label for="reserveTarget">Reserve target (<span class="cur">$</span>)</label><input id="reserveTarget" inputmode="decimal" placeholder="e.g. 1000">
+        <label for="reserveCurrent">Current reserve (<span class="cur">$</span>)</label><input id="reserveCurrent" inputmode="decimal" placeholder="e.g. 100">
+        <button class="btn alt" type="button" id="saveReserve">Save reserve plan</button>
+        <p class="note" id="reserveStatus">No reserve started.</p>
+      </div>
+        <div class="card goal-support-card">
+        <h3>Savings health tracker</h3>
+        <p class="mut">A quick check of how your savings habit is performing right now.</p>
+        <b id="healthLabel">Starting</b><p id="healthScore">0/100</p>
+        <div class="bar2"><i id="healthBar" style="width:0%"></i></div>
+        <p class="mut" id="healthExplain">Savings health compares goal progress, reserve level, and whether deposits are beating withdrawals.</p>
+      </div>
+      </div>
+    </div>
+    <div class="goal-reflection">
+      <div class="goal-block-heading"><span class="eyebrow">Reflection</span><h3>Learn from your pattern</h3></div>
+      <div class="goal-reflection-grid">
+        <div class="card goal-insights-card">
+          <h3>Your Savings Insights</h3>
+          <div id="goalInsights"><p class="mut">Add a goal or contribution to generate explainable insights.</p></div>
+        </div>
+        <div class="card goal-insights-card">
+          <div class="activity-heading"><div><span class="eyebrow">History</span><h3>Activity timeline</h3></div><button class="btn alt" type="button" id="clearActivity">Clear activity</button></div>
+          <div class="activity-filter"><label for="activityFilter">Show</label><select id="activityFilter"><option value="all">All activity</option><option value="goal">Goals</option><option value="contribution">Contributions</option><option value="withdrawal">Withdrawals</option><option value="milestone">Milestones</option></select></div>
+          <div id="activityTimeline"><p class="mut">No activity yet.</p></div>
+        </div>
+      </div>
+    </div>
+    <details class="card" style="margin-top:16px">
+      <summary><b>Transparency and data controls</b></summary>
+      <p class="mut">This is a frontend-only demo. Goals, contributions, activity, preferences, and reserve planning are stored in localStorage on this device. No real money, bank connection, or financial API is used.</p>
+      <div class="row"><button class="btn alt" type="button" id="exportData">Export demo data</button><label class="btn alt" for="importData" style="cursor:pointer">Import demo data</label><input id="importData" type="file" accept="application/json" hidden><button class="btn alt" type="button" id="resetDemo">Reset added demo data</button></div>
+    </details>
+  </section>
+
+  <!-- MISTAKES -->
+  <section id="mistakes">
+    <h2>Common money mistakes</h2>
+    <div id="mm"></div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <h2>Infographics &amp; learning gallery</h2>
+    <div class="row">
+      <input id="gs" type="search" placeholder="Search tips, goals, expenses…" aria-label="Search gallery">
+      <select id="go" style="max-width:170px" aria-label="Sort">
+        <option value="rel">Most relevant</option>
+        <option value="az">A–Z</option>
+        <option value="new">Newest</option>
+      </select>
+    </div>
+    <div class="chips" id="gc2" style="margin:10px 0"></div>
+    <div class="grid" id="gg"></div>
+    <p id="gm2" class="note" hidden>No matching content found. Try a different word or clear the filter.</p>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about-section">
+    <div class="about-intro">
+      <p class="eyebrow">Built for clearer money decisions</p>
+      <h2>Money skills should feel usable, not intimidating.</h2>
+      <p class="lead">BudgetBasics turns everyday money questions into small, practical decisions you can test right now. Learn the idea, run the numbers, and leave with a next step.</p>
+    </div>
+    <div class="about-grid">
+      <article class="about-panel">
+        <span class="about-icon" aria-hidden="true">01</span>
+        <h3>Learn simply</h3>
+        <p class="mut">Short explanations, examples and quizzes make the fundamentals easier to remember.</p>
+      </article>
+      <article class="about-panel">
+        <span class="about-icon" aria-hidden="true">02</span>
+        <h3>Practice safely</h3>
+        <p class="mut">Use the calculators and planner with sample values before applying ideas to real life.</p>
+      </article>
+      <article class="about-panel">
+        <span class="about-icon" aria-hidden="true">03</span>
+        <h3>Keep your privacy</h3>
+        <p class="mut">Tools run in your browser. This educational site does not connect to a bank or sell your data.</p>
+      </article>
+    </div>
+    <div class="about-foot">
+      <span><b>Free to use</b><small>No subscription or paywall</small></span>
+      <span><b>Designed for students</b><small>Plain language, useful examples</small></span>
+      <span><b>Educational only</b><small>Not personal financial advice</small></span>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-heading">
+      <div>
+        <p class="eyebrow">Help shape the next version</p>
+        <h2>Feedback &amp; contact</h2>
+      </div>
+      <p class="mut">A short note is enough. Your feedback stays in this browser.</p>
+    </div>
+    <div class="contact-grid">
+      <form class="card compact-card feedback-card" id="ff" novalidate>
+        <div class="compact-heading"><span class="eyebrow">Feedback form</span><h3>Tell us what would help</h3></div>
+        <div class="feedback-fields">
+          <div class="mini-field">
+            <label for="fn">Name</label>
+            <input id="fn">
+            <div class="err"></div>
+          </div>
+          <div class="mini-field">
+            <label for="fe">Email</label>
+            <input id="fe" type="email">
+            <div class="err"></div>
+          </div>
+          <div class="mini-field">
+            <label for="fr">Rating</label>
+            <select id="fr">
+              <option value="">Choose…</option>
+              <option>5 – Excellent</option>
+              <option>4 – Good</option>
+              <option>3 – Okay</option>
+              <option>2 – Poor</option>
+              <option>1 – Very poor</option>
+            </select>
+            <div class="err"></div>
+          </div>
+          <div class="mini-field feedback-comment">
+            <label for="fc">Comments</label>
+            <textarea id="fc" rows="2"></textarea>
+            <div class="err"></div>
+          </div>
+        </div>
+        <div class="feedback-actions"><button class="btn">Send feedback</button><p id="fm" role="status" class="note" hidden>Thanks! Your feedback passed validation. Nothing was stored or sent anywhere.</p></div>
+      </form>
+      <div class="card compact-card contact-card">
+        <div class="compact-heading"><span class="eyebrow">Stay connected</span><h3>Have a question?</h3></div>
+        <p class="mut">Found something unclear or have an idea for a lesson? Send a note and help make the site more useful.</p>
+        <div class="contact-details">
+          <a href="mailto:budgetbasics@gmail.com">📧 budgetbasics@gmail.com</a>
+          <span>📞 +000 000 0000</span>
+          <span>🔗 <a href="#" rel="noopener">Instagram</a> · <a href="#" rel="noopener">YouTube</a> · <a href="#" rel="noopener">X</a></span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="#home" aria-label="BudgetBasics home"><b>$</b><span>BudgetBasics</span></a>
+        <p class="mut">Small steps. Clearer choices. Better money habits.</p>
+        <span class="footer-status"><i></i> Private by design</span>
+      </div>
+      <nav id="sitemap" class="footer-nav" aria-label="Footer navigation">
+        <b>Sitemap</b>
+        <a href="#learn">Learn budgeting</a>
+        <a href="#needs">Needs vs wants</a>
+        <a href="#rule">Try the 50-30-20 rule</a>
+        <a href="#planner">Practice planning</a>
+        <a href="#gallery">Explore resources</a>
+        <a href="#" data-chat>Get help</a>
+      </nav>
+      <div class="footer-note">
+        <b>For learning, not financial advice</b>
+        <p class="mut">Calculators and the assistant provide educational estimates. Use them as a starting point and make decisions that fit your situation.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 BudgetBasics</span>
+      <span>Free educational tools for students</span>
+      <span>Nothing leaves your browser</span>
+    </div>
+  </div>
+</footer>
+
+<button class="btn" id="top" aria-label="Back to top">↑</button>
+
+<!-- AI ASSISTANT -->
+<button class="fab" id="fab" aria-label="Open AI assistant" aria-expanded="false" aria-controls="chatWindow">🤖<span class="dot"></span></button>
+<div class="cw" id="chatWindow" role="dialog" aria-label="BudgetBasics AI assistant" hidden>
+  <div class="ch">
+    <div class="av" aria-hidden="true">🤖</div>
+    <div>
+      <b>BudgetBot</b><br>
+      <small>Basic budgeting help · runs in your browser</small>
+    </div>
+    <button class="ic" id="cclear" aria-label="Clear chat">↺</button>
+    <button class="ic" id="cx" aria-label="Close assistant">✕</button>
+  </div>
+  <div id="log" aria-live="polite"></div>
+  <div class="chips" id="sp"></div>
+  <div class="row cin">
+    <input id="ci" placeholder="Ask about budgeting…" aria-label="Your question" autocomplete="off">
+    <button class="btn" id="ask">Ask</button>
+  </div>
+  <p class="mut disc">Basic educational information, not professional financial advice.</p>
+</div>
+
+<!-- AUTH DIALOG -->
+<dialog id="ad" aria-labelledby="at">
+  <div class="row" style="justify-content:space-between">
+    <h2 id="at" style="font-size:1.4rem">Welcome back</h2>
+    <button class="ic" id="ax" aria-label="Close">✕</button>
+  </div>
+  <div class="seg">
+    <button type="button" id="tin" aria-pressed="true">Sign in</button>
+    <button type="button" id="tup" aria-pressed="false">Create account</button>
+  </div>
+  <form id="af" novalidate>
+    <div id="nmw" hidden>
+      <label for="anm">Username</label>
+      <input id="anm" autocomplete="username" maxlength="24" autocapitalize="none">
+    </div>
+    <label for="aem">Username or email</label>
+    <input id="aem" type="text" autocomplete="username" autocapitalize="none">
+    <label for="apw">Password</label>
+    <input id="apw" type="password" autocomplete="current-password">
+    <label style="font-weight:400;display:flex;gap:8px;align-items:center">
+      <input type="checkbox" id="asp" style="width:auto;min-height:0"> Show password
+    </label>
+    <div class="err" id="ae" role="alert"></div>
+    <button class="btn" id="asub" style="width:100%">Sign in</button>
+  </form>
+  <p class="note" id="demoLogin"><b>Demo login</b><br>Username: <b>darkprotocol</b><br>Password: <b>latest</b></p>
+  <p class="mut" style="margin-top:12px">
+    Accounts are optional – every tool works without one. Your name and country stay on this device only; nothing is sent to a server. Don’t reuse a real password.
+  </p>
+</dialog>
+
+<div id="toast" role="status" hidden></div>
+
+<script src="script.js"></script>
+</body>
+</html>
